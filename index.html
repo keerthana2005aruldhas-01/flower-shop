@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Floral Elegance | Artisan Flower Shop & Boutique</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Google Fonts: Playfair Display & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            rose: {
+              50: '#fdf2f4',
+              100: '#fde8eb',
+              200: '#fbd0d7',
+              300: '#f7aab7',
+              400: '#f2768d',
+              500: '#e64563',
+              600: '#d12948',
+              700: '#b01d37',
+              800: '#921b31',
+              900: '#7b1b2e',
+            },
+            sage: {
+              50: '#f4f7f4',
+              100: '#e3ebe3',
+              200: '#c9d8c9',
+              300: '#a3be9e',
+              400: '#7b9f78',
+              500: '#5c8259',
+              600: '#476844',
+              700: '#3a5338',
+              800: '#30432f',
+              900: '#293828',
+            },
+            cream: {
+              50: '#fdfbf7',
+              100: '#fbf7ee',
+              200: '#f5edd8',
+              300: '#ece0bd',
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Inter"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Styles & Smooth Scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+    .font-serif {
+      font-family: 'Playfair Display', serif;
+    }
+    .font-sans {
+      font-family: 'Inter', sans-serif;
+    }
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .badge-bounce {
+      animation: bounceSmall 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes bounceSmall {
+      0% { transform: scale(0.5); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    /* Toast Alert Notification Animation */
+    @keyframes slideIn {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .animate-slide-in {
+      animation: slideIn 0.3s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="bg-cream-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col selection:bg-rose-200 selection:text-rose-900">
+
+  <!-- ================= HEADER / NAVBAR ================= -->
+  <header class="sticky top-0 z-40 glass-effect border-b border-rose-100 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        
+        <!-- Logo -->
+        <a href="#home" onclick="switchView('store')" class="flex items-center gap-2 group">
+          <div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-600 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300">
+            <i data-lucide="flower-2" class="w-6 h-6"></i>
+          </div>
+          <span class="font-serif text-2xl font-bold tracking-tight text-slate-900">Floral <span class="text-rose-600 font-normal italic">Elegance</span></span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav class="hidden md:flex items-center space-x-8 font-medium text-sm text-slate-600">
+          <a href="#home" onclick="switchView('store')" class="hover:text-rose-600 transition-colors">Home</a>
+          <a href="#catalog" onclick="switchView('store')" class="hover:text-rose-600 transition-colors">Shop Bouquets</a>
+          <a href="#about" onclick="switchView('store')" class="hover:text-rose-600 transition-colors">About Us</a>
+          <a href="#contact" onclick="switchView('store')" class="hover:text-rose-600 transition-colors">Contact</a>
+        </nav>
+
+        <!-- Right Side Controls (Cart & Admin Button) -->
+        <div class="flex items-center gap-4">
+          
+          <!-- Admin Route Toggle Button -->
+          <button id="admin-toggle-btn" onclick="toggleAdminView()" class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-full border border-sage-300 bg-sage-50 text-sage-800 hover:bg-sage-600 hover:text-white transition-all duration-200 shadow-sm">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+            <span id="admin-btn-text" class="hidden sm:inline">Admin Portal</span>
+          </button>
+
+          <!-- Shopping Cart Icon Button -->
+          <button onclick="toggleCartModal()" class="relative p-2.5 text-slate-700 hover:text-rose-600 rounded-full hover:bg-rose-50 transition-colors" aria-label="View Shopping Cart">
+            <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+            <span id="cart-badge" class="absolute top-1 right-1 bg-rose-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md hidden">0</span>
+          </button>
+
+          <!-- Mobile Menu Button -->
+          <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-600 hover:text-slate-900 focus:outline-none">
+            <i data-lucide="menu" class="w-6 h-6"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-rose-100 bg-white/95 px-4 pt-2 pb-6 space-y-3">
+      <a href="#home" onclick="switchView('store'); toggleMobileMenu();" class="block py-2 text-slate-700 hover:text-rose-600 font-medium">Home</a>
+      <a href="#catalog" onclick="switchView('store'); toggleMobileMenu();" class="block py-2 text-slate-700 hover:text-rose-600 font-medium">Shop Bouquets</a>
+      <a href="#about" onclick="switchView('store'); toggleMobileMenu();" class="block py-2 text-slate-700 hover:text-rose-600 font-medium">About Us</a>
+      <a href="#contact" onclick="switchView('store'); toggleMobileMenu();" class="block py-2 text-slate-700 hover:text-rose-600 font-medium">Contact</a>
+    </div>
+  </header>
+
+
+  <!-- ================= MAIN CONTENT WRAPPER ================= -->
+  <main class="flex-grow">
+
+    <!-- ================= PUBLIC E-COMMERCE STOREFRONT ================= -->
+    <div id="store-view">
+      
+      <!-- HERO BANNER SECTION -->
+      <section id="home" class="relative overflow-hidden bg-gradient-to-b from-rose-50 via-cream-50 to-cream-50 py-16 md:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+              <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-100 text-rose-800 text-xs font-semibold tracking-wide uppercase">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-rose-500"></i> Fresh Daily Floral Crafting
+              </span>
+              <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-slate-900 leading-tight">
+                Handcrafted Bouquets for Life’s <span class="italic text-rose-600 font-normal">Precious Moments</span>
+              </h1>
+              <p class="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
+                Brighten someone's day with artisan floral arrangements, fresh garden blooms, and custom luxury bouquets sustainably sourced and delivered with care.
+              </p>
+              
+              <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                <a href="#catalog" class="w-full sm:w-auto px-8 py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-medium rounded-full shadow-lg shadow-rose-200 hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2">
+                  Browse Collection <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 font-medium rounded-full shadow-sm transition-all duration-300 flex items-center justify-center">
+                  Custom Bouquet Request
+                </a>
+              </div>
+
+              <!-- Highlights -->
+              <div class="grid grid-cols-3 gap-4 pt-8 border-t border-rose-200/60 max-w-lg mx-auto lg:mx-0 text-slate-700">
+                <div class="text-center lg:text-left">
+                  <p class="font-serif font-bold text-xl text-rose-700">100%</p>
+                  <p class="text-xs text-slate-500">Fresh Guarantee</p>
+                </div>
+                <div class="text-center lg:text-left">
+                  <p class="font-serif font-bold text-xl text-rose-700">Same Day</p>
+                  <p class="text-xs text-slate-500">Local Delivery</p>
+                </div>
+                <div class="text-center lg:text-left">
+                  <p class="font-serif font-bold text-xl text-rose-700">4.9 ★</p>
+                  <p class="text-xs text-slate-500">Customer Rating</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hero Image Showcase -->
+            <div class="lg:col-span-5 relative">
+              <div class="relative mx-auto max-w-md lg:max-w-none">
+                <div class="absolute -top-4 -left-4 w-72 h-72 bg-rose-200 rounded-full filter blur-3xl opacity-50"></div>
+                <div class="absolute -bottom-4 -right-4 w-72 h-72 bg-sage-200 rounded-full filter blur-3xl opacity-50"></div>
+                
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                  <img src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=1000&q=80" alt="Fresh Floral Arrangement" class="w-full h-[460px] object-cover hover:scale-105 transition-transform duration-700">
+                  
+                  <!-- Floating Badge -->
+                  <div class="absolute bottom-6 left-6 right-6 glass-effect p-4 rounded-2xl border border-white/40 shadow-lg flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 rounded-full bg-rose-500 text-white flex items-center justify-center font-bold">
+                        🌸
+                      </div>
+                      <div>
+                        <p class="text-xs font-semibold uppercase tracking-wide text-rose-700">Bestseller of the Week</p>
+                        <p class="font-serif font-bold text-slate-900 text-sm">Velvet Rose & Eucalyptus</p>
+                      </div>
+                    </div>
+                    <span class="font-bold text-slate-900 text-lg">$64.99</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- PRODUCT CATALOG SECTION -->
+      <section id="catalog" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-slate-900 mb-3">Our Floral Collections</h2>
+          <p class="text-slate-600">Select from our curated seasonal arrangements crafted fresh every morning.</p>
+        </div>
+
+        <!-- Filter Buttons & Search -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-10">
+          
+          <!-- Category Tabs -->
+          <div class="flex flex-wrap items-center justify-center gap-2" id="category-filters">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Search Input -->
+          <div class="relative w-full md:w-72">
+            <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+            <input type="text" id="search-input" oninput="renderCatalog()" placeholder="Search flowers..." class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 transition-all">
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <!-- Dynamically populated products -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="no-products-msg" class="hidden text-center py-16 bg-white rounded-3xl border border-dashed border-slate-200 max-w-lg mx-auto">
+          <i data-lucide="flower" class="w-12 h-12 text-slate-300 mx-auto mb-3"></i>
+          <h3 class="font-serif text-lg font-semibold text-slate-800">No flowers found</h3>
+          <p class="text-slate-500 text-sm mt-1">Try adjusting your search terms or filter selection.</p>
+        </div>
+      </section>
+
+      <!-- ABOUT SECTION -->
+      <section id="about" class="py-16 bg-sage-50 border-y border-sage-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="relative">
+              <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=1000&q=80" alt="Florist at work" class="rounded-3xl shadow-xl w-full h-[400px] object-cover">
+              <div class="absolute -bottom-6 -right-6 hidden sm:block bg-white p-6 rounded-2xl shadow-xl max-w-xs border border-sage-100">
+                <p class="font-serif italic text-rose-700 text-lg">"Flowers are love's truest language."</p>
+                <p class="text-xs font-semibold text-slate-500 mt-2">— Master Florist</p>
+              </div>
+            </div>
+            <div class="space-y-6">
+              <span class="text-xs font-bold uppercase tracking-wider text-sage-700">Our Story & Values</span>
+              <h2 class="font-serif text-3xl sm:text-4xl font-bold text-slate-900">Crafting Memories with Fresh Garden Blooms</h2>
+              <p class="text-slate-600 leading-relaxed">
+                Founded with a passion for botanical aesthetics, Floral Elegance brings together local sustainable farms and master arrangement design. Every stem is carefully inspected to ensure your sentiments are expressed perfectly.
+              </p>
+              <div class="grid grid-cols-2 gap-6 pt-2">
+                <div class="flex items-start gap-3">
+                  <div class="p-2 rounded-lg bg-sage-200 text-sage-800"><i data-lucide="leaf" class="w-5 h-5"></i></div>
+                  <div>
+                    <h4 class="font-semibold text-slate-900 text-sm">Eco-Friendly</h4>
+                    <p class="text-xs text-slate-500 mt-0.5">100% biodegradable wrappings and vases.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="p-2 rounded-lg bg-rose-200 text-rose-800"><i data-lucide="heart" class="w-5 h-5"></i></div>
+                  <div>
+                    <h4 class="font-semibold text-slate-900 text-sm">Made with Care</h4>
+                    <p class="text-xs text-slate-500 mt-0.5">Individually styled by certified floral artists.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TESTIMONIALS SECTION -->
+      <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-xl mx-auto mb-12">
+          <h2 class="font-serif text-3xl font-bold text-slate-900">Loved by Our Clients</h2>
+          <p class="text-slate-500 text-sm mt-2">See what our happy customers have to say about our bouquets.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+            <p class="text-slate-600 text-sm italic mb-4">"The roses for our anniversary arrived in pristine condition and lasted over two full weeks. Breathtaking quality!"</p>
+            <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+              <div class="w-9 h-9 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-sm">EM</div>
+              <div>
+                <h5 class="font-semibold text-slate-900 text-sm">Emily R.</h5>
+                <p class="text-xs text-slate-400">Verified Buyer</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+            <p class="text-slate-600 text-sm italic mb-4">"Ordered a custom bouquet for my mom's birthday. The same-day delivery service was prompt and the arrangement was stunning."</p>
+            <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+              <div class="w-9 h-9 rounded-full bg-sage-100 text-sage-700 flex items-center justify-center font-bold text-sm">DL</div>
+              <div>
+                <h5 class="font-semibold text-slate-900 text-sm">David L.</h5>
+                <p class="text-xs text-slate-400">Verified Buyer</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col justify-between">
+            <p class="text-slate-600 text-sm italic mb-4">"The online ordering process is so seamless, and their admin team responded immediately when I wanted to add a custom note."</p>
+            <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+              <div class="w-9 h-9 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-sm">SK</div>
+              <div>
+                <h5 class="font-semibold text-slate-900 text-sm">Sophia K.</h5>
+                <p class="text-xs text-slate-400">Verified Buyer</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT SECTION -->
+      <section id="contact" class="py-16 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div class="lg:col-span-5 space-y-6">
+              <h2 class="font-serif text-3xl font-bold text-slate-900">Get in Touch</h2>
+              <p class="text-slate-600 leading-relaxed">
+                Have questions about custom wedding flowers, event decorations, or corporate subscriptions? Reach out to our florists today.
+              </p>
+              <div class="space-y-4 pt-4">
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center"><i data-lucide="map-pin" class="w-5 h-5"></i></div>
+                  <div>
+                    <p class="text-xs text-slate-400 uppercase font-semibold">Visit Our Studio</p>
+                    <p class="text-sm text-slate-800 font-medium">124 Floral Blossom Ave, Garden District</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center"><i data-lucide="phone" class="w-5 h-5"></i></div>
+                  <div>
+                    <p class="text-xs text-slate-400 uppercase font-semibold">Call Us Direct</p>
+                    <p class="text-sm text-slate-800 font-medium">+1 (800) 555-FLOWERS</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <div class="w-10 h-10 rounded-full bg-rose-50 text-rose-600 flex items-center justify-center"><i data-lucide="mail" class="w-5 h-5"></i></div>
+                  <div>
+                    <p class="text-xs text-slate-400 uppercase font-semibold">Email Enquiries</p>
+                    <p class="text-sm text-slate-800 font-medium">hello@floralelegance.com</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-7 bg-cream-50 p-8 rounded-3xl border border-rose-100 shadow-sm">
+              <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Your Name</label>
+                    <input type="text" required placeholder="Jane Doe" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500">
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Email Address</label>
+                    <input type="email" required placeholder="jane@example.com" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500">
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Subject / Occasion</label>
+                  <input type="text" placeholder="Wedding Inquiry / Custom Arrangement" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Message</label>
+                  <textarea rows="4" required placeholder="Tell us about your floral needs..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 bg-rose-600 hover:bg-rose-700 text-white font-medium rounded-xl shadow-md transition-all duration-200 flex items-center justify-center gap-2">
+                  <i data-lucide="send" class="w-4 h-4"></i> Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+
+    <!-- ================= INTERACTIVE ADMIN PANEL VIEW ================= -->
+    <div id="admin-view" class="hidden bg-slate-50 min-h-screen py-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Admin Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-8">
+          <div>
+            <div class="flex items-center gap-3">
+              <span class="px-2.5 py-1 bg-sage-100 text-sage-800 rounded-md text-xs font-bold uppercase tracking-wider">Admin Portal</span>
+              <span id="auth-status-badge" class="px-2.5 py-1 bg-amber-100 text-amber-800 rounded-md text-xs font-medium">Logged Out</span>
+            </div>
+            <h1 class="font-serif text-2xl font-bold text-slate-900 mt-2">Flower & Inventory Manager</h1>
+            <p class="text-xs text-slate-500 mt-1">Changes made here synchronously update the public storefront in real-time.</p>
+          </div>
+
+          <div id="admin-actions" class="flex items-center gap-3">
+            <button id="login-modal-btn" onclick="openLoginModal()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white text-sm font-medium rounded-xl shadow-sm transition-all flex items-center gap-2">
+              <i data-lucide="lock" class="w-4 h-4"></i> Admin Login
+            </button>
+            <button id="logout-btn" onclick="handleLogout()" class="hidden px-4 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-sm font-medium rounded-xl transition-all flex items-center gap-2">
+              <i data-lucide="log-out" class="w-4 h-4"></i> Log Out
+            </button>
+          </div>
+        </div>
+
+        <!-- Protected Admin Content -->
+        <div id="admin-content" class="opacity-50 pointer-events-none transition-all duration-300">
+          
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left Column: Add Product Form -->
+            <div class="lg:col-span-5 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+              <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+                <h3 class="font-serif text-lg font-bold text-slate-900 flex items-center gap-2">
+                  <i data-lucide="plus-circle" class="w-5 h-5 text-rose-600"></i> Add New Bouquet / Flower
+                </h3>
+              </div>
+
+              <form id="add-product-form" onsubmit="handleAddProduct(event)" class="space-y-4">
+                <div>
+                  <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Product Title *</label>
+                  <input type="text" id="prod-title" required placeholder="e.g. Midnight Lavender Dreams" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                  <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Category *</label>
+                    <select id="prod-category" required class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500">
+                      <option value="Roses">Roses</option>
+                      <option value="Lilies">Lilies</option>
+                      <option value="Orchids">Orchids</option>
+                      <option value="Bouquets">Custom Bouquets</option>
+                      <option value="Occasions">Occasions</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Price ($USD) *</label>
+                    <input type="number" step="0.01" min="1" id="prod-price" required placeholder="49.99" class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Image Choice *</label>
+                  <div class="space-y-2">
+                    <input type="url" id="prod-img-url" placeholder="https://images.unsplash.com/..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500">
+                    <p class="text-[11px] text-slate-400 text-center">- OR Upload Image File -</p>
+                    <input type="file" id="prod-img-file" accept="image/*" onchange="handleImageFileUpload(event)" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-rose-50 file:text-rose-700 hover:file:bg-rose-100">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Short Description</label>
+                  <textarea id="prod-desc" rows="3" placeholder="Hand-picked long-stem roses surrounded by fresh greenery..." class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-rose-600 hover:bg-rose-700 text-white font-medium text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+                  <i data-lucide="check" class="w-4 h-4"></i> Publish Product
+                </button>
+              </form>
+            </div>
+
+            <!-- Right Column: Inventory Table -->
+            <div class="lg:col-span-7 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+              <div class="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
+                <h3 class="font-serif text-lg font-bold text-slate-900 flex items-center gap-2">
+                  <i data-lucide="database" class="w-5 h-5 text-sage-600"></i> Active Inventory Catalog (<span id="admin-count">0</span>)
+                </h3>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm text-slate-600">
+                  <thead class="bg-slate-50 text-slate-500 text-xs font-semibold uppercase border-b border-slate-200">
+                    <tr>
+                      <th class="p-3">Item</th>
+                      <th class="p-3">Category</th>
+                      <th class="p-3">Price</th>
+                      <th class="p-3">Status</th>
+                      <th class="p-3 text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody id="admin-inventory-table" class="divide-y divide-slate-100">
+                    <!-- Dynamic Rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        <div class="space-y-4">
+          <div class="flex items-center gap-2 text-white">
+            <i data-lucide="flower-2" class="w-6 h-6 text-rose-500"></i>
+            <span class="font-serif text-xl font-bold tracking-tight">Floral Elegance</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">Artisan floral design shop supplying luxury arrangements, fresh garden bouquets, and bespoke event styling.</p>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-semibold uppercase text-white tracking-wider mb-3">Quick Navigation</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#home" onclick="switchView('store')" class="hover:text-rose-400 transition-colors">Home</a></li>
+            <li><a href="#catalog" onclick="switchView('store')" class="hover:text-rose-400 transition-colors">Flower Catalog</a></li>
+            <li><a href="#about" onclick="switchView('store')" class="hover:text-rose-400 transition-colors">About Us</a></li>
+            <li><a href="#contact" onclick="switchView('store')" class="hover:text-rose-400 transition-colors">Contact Enquiries</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-semibold uppercase text-white tracking-wider mb-3">Floral Categories</h4>
+          <ul class="space-y-2 text-xs text-slate-400">
+            <li>Red & Pink Roses</li>
+            <li>Stargazer Lilies</li>
+            <li>Exotic Orchids</li>
+            <li>Bridal & Occasion Bouquets</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-semibold uppercase text-white tracking-wider mb-3">Operating Hours</h4>
+          <p class="text-xs text-slate-400">Mon - Fri: 8:00 AM - 7:00 PM</p>
+          <p class="text-xs text-slate-400 mt-1">Saturday: 9:00 AM - 5:00 PM</p>
+          <p class="text-xs text-slate-400 mt-1">Sunday: Express Deliveries Only</p>
+        </div>
+
+      </div>
+
+      <div class="mt-12 pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
+        &copy; 2026 Floral Elegance Boutique. All Rights Reserved. Designed for elegance & fresh moments.
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ================= SHOPPING CART MODAL ================= -->
+  <div id="cart-modal" class="fixed inset-0 z-50 overflow-hidden hidden">
+    <!-- Backdrop -->
+    <div onclick="toggleCartModal()" class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm transition-opacity"></div>
+    
+    <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+      <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+        
+        <!-- Modal Header -->
+        <div class="p-6 bg-rose-50 border-b border-rose-100 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i data-lucide="shopping-bag" class="w-5 h-5 text-rose-600"></i>
+            <h3 class="font-serif text-lg font-bold text-slate-900">Your Flower Basket</h3>
+          </div>
+          <button onclick="toggleCartModal()" class="p-2 text-slate-400 hover:text-slate-700 rounded-full">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Modal Body (Items) -->
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4 divide-y divide-slate-100">
+          <!-- Dynamically Populated -->
+        </div>
+
+        <!-- Cart Empty State -->
+        <div id="cart-empty-msg" class="hidden flex-1 flex flex-col items-center justify-center p-6 text-center">
+          <i data-lucide="flower-2" class="w-12 h-12 text-slate-300 mb-3"></i>
+          <p class="font-serif text-lg font-semibold text-slate-800">Your basket is empty</p>
+          <p class="text-xs text-slate-500 mt-1 mb-4">Add some beautiful blooms to get started!</p>
+          <button onclick="toggleCartModal()" class="px-6 py-2.5 bg-rose-600 text-white text-xs font-semibold rounded-full shadow-sm hover:bg-rose-700">Explore Catalog</button>
+        </div>
+
+        <!-- Modal Footer / Checkout Summary -->
+        <div id="cart-footer" class="p-6 border-t border-slate-100 bg-slate-50 space-y-4">
+          <div class="space-y-1 text-sm">
+            <div class="flex justify-between text-slate-600">
+              <span>Subtotal</span>
+              <span id="cart-subtotal" class="font-semibold text-slate-900">$0.00</span>
+            </div>
+            <div class="flex justify-between text-slate-600">
+              <span>Delivery Fee</span>
+              <span class="text-emerald-600 font-medium">FREE</span>
+            </div>
+            <div class="flex justify-between text-base font-bold text-slate-900 pt-2 border-t border-slate-200">
+              <span>Total</span>
+              <span id="cart-total" class="text-rose-600">$0.00</span>
+            </div>
+          </div>
+
+          <button onclick="openCheckoutModal()" class="w-full py-3 bg-rose-600 hover:bg-rose-700 text-white font-medium text-sm rounded-xl shadow-md transition-all flex items-center justify-center gap-2">
+            Proceed to Checkout <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= CHECKOUT MODAL ================= -->
+  <div id="checkout-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+    <div onclick="closeCheckoutModal()" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+    <div class="flex min-h-full items-center justify-center p-4">
+      <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6 sm:p-8 border border-rose-100">
+        
+        <button onclick="closeCheckoutModal()" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <div class="text-center mb-6">
+          <div class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto mb-2">
+            <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-serif text-2xl font-bold text-slate-900">Delivery Details</h3>
+          <p class="text-xs text-slate-500 mt-1">Complete your floral order details below</p>
+        </div>
+
+        <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Full Name *</label>
+            <input type="text" required placeholder="Recipient / Sender Name" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500">
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Phone *</label>
+              <input type="tel" required placeholder="+1 (555) 000-0000" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Delivery Date *</label>
+              <input type="date" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Delivery Address *</label>
+            <input type="text" required placeholder="Street name, Apt/Suite number, City" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500">
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Card Greeting Note (Optional)</label>
+            <textarea rows="2" placeholder="e.g. Happy Birthday Sarah! With love, Alex." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500"></textarea>
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" class="w-full py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm rounded-xl shadow-lg shadow-rose-200 transition-all">
+              Place Order & Pay
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= ADMIN LOGIN MODAL ================= -->
+  <div id="login-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+    <div onclick="closeLoginModal()" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+    <div class="flex min-h-full items-center justify-center p-4">
+      <div class="relative w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 sm:p-8 border border-slate-200">
+        
+        <button onclick="closeLoginModal()" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-slate-600">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <div class="text-center mb-6">
+          <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-800 flex items-center justify-center mx-auto mb-2">
+            <i data-lucide="lock" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-serif text-2xl font-bold text-slate-900">Admin Authentication</h3>
+          <p class="text-xs text-slate-500 mt-1">Enter credentials to unlock product management</p>
+        </div>
+
+        <div class="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-800 flex items-start gap-2">
+          <i data-lucide="info" class="w-4 h-4 shrink-0 mt-0.5 text-amber-600"></i>
+          
+        </div>
+
+        <form id="login-form" onsubmit="handleLoginSubmit(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Username</label>
+            <input type="text" id="login-username" required placeholder="admin" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500">
+          </div>
+          
+          <div>
+            <label class="block text-xs font-semibold uppercase text-slate-600 mb-1">Password</label>
+            <input type="password" id="login-password" required placeholder="••••••••" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500">
+          </div>
+
+          <button type="submit" class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-medium text-sm rounded-xl shadow-md transition-all">
+            Login to Admin
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ================= TOAST NOTIFICATION CONTAINER ================= -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+
+  <!-- ================= APPLICATION SCRIPT ================= -->
+  <script>
+    /* ================= INITIAL STATE & PRODUCT DATA ================= */
+    let products = [
+      {
+        id: 1,
+        title: "Velvet Crimson Roses",
+        category: "Roses",
+        price: 59.99,
+        image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+        description: "Classic long-stem crimson red roses hand-tied with fresh eucalyptus leaves.",
+        inStock: true
+      },
+      {
+        id: 2,
+        title: "Blush Pink Stargazer Lily",
+        category: "Lilies",
+        price: 68.50,
+        image: "https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=800&q=80",
+        description: "Fragrant star-shaped lilies with subtle blush hues and graceful stems.",
+        inStock: true
+      },
+      {
+        id: 3,
+        title: "Imperial Royal Orchid",
+        category: "Orchids",
+        price: 84.00,
+        image: "https://images.unsplash.com/photo-1525310072745-f49212b5ac6d?auto=format&fit=crop&w=800&q=80",
+        description: "Exotic potted orchid with long-lasting vibrant blooms for luxury spaces.",
+        inStock: true
+      },
+      {
+        id: 4,
+        title: "Spring Botanical Bloom",
+        category: "Bouquets",
+        price: 72.00,
+        image: "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80",
+        description: "An eclectic mix of wild peonies, ranunculus, and garden greenery.",
+        inStock: true
+      },
+      {
+        id: 5,
+        title: "Golden Celebration Bouquet",
+        category: "Occasions",
+        price: 95.00,
+        image: "https://images.unsplash.com/photo-1533616688419-b7a585564566?auto=format&fit=crop&w=800&q=80",
+        description: "Vibrant yellow spray roses and white lisianthus crafted for anniversaries.",
+        inStock: true
+      },
+      {
+        id: 6,
+        title: "Pastel Meadow Dream",
+        category: "Bouquets",
+        price: 62.50,
+        image: "https://images.unsplash.com/photo-1563241527-3004b7be0ffd?auto=format&fit=crop&w=800&q=80",
+        description: "Soft pastel carnations and hydrangeas wrapped in eco-friendly paper.",
+        inStock: true
+      }
+    ];
+
+    let cart = [];
+    let currentCategory = "All";
+    let isAdminLoggedIn = false;
+    let uploadedBase64Image = "";
+
+    /* ================= INITIALIZATION ================= */
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      renderCategoryFilters();
+      renderCatalog();
+      renderAdminInventory();
+      updateCartUI();
+    });
+
+    /* ================= ROUTING & VIEW SWITCHING ================= */
+    function switchView(viewName) {
+      const storeView = document.getElementById('store-view');
+      const adminView = document.getElementById('admin-view');
+      const adminBtnText = document.getElementById('admin-btn-text');
+
+      if (viewName === 'admin') {
+        storeView.classList.add('hidden');
+        adminView.classList.remove('hidden');
+        adminBtnText.textContent = "Back to Store";
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        adminView.classList.add('hidden');
+        storeView.classList.remove('hidden');
+        adminBtnText.textContent = "Admin Portal";
+      }
+      lucide.createIcons();
+    }
+
+    function toggleAdminView() {
+      const adminView = document.getElementById('admin-view');
+      if (adminView.classList.contains('hidden')) {
+        switchView('admin');
+      } else {
+        switchView('store');
+      }
+    }
+
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    /* ================= CATALOG & FILTERING ================= */
+    function renderCategoryFilters() {
+      const categories = ["All", "Roses", "Lilies", "Orchids", "Bouquets", "Occasions"];
+      const container = document.getElementById('category-filters');
+      
+      container.innerHTML = categories.map(cat => `
+        <button 
+          onclick="setCategory('${cat}')" 
+          class="px-4 py-2 rounded-full text-xs font-medium transition-all ${
+            currentCategory === cat 
+              ? 'bg-rose-600 text-white shadow-md shadow-rose-200' 
+              : 'bg-white text-slate-600 border border-slate-200 hover:bg-rose-50 hover:text-rose-600'
+          }">
+          ${cat}
+        </button>
+      `).join('');
+    }
+
+    function setCategory(cat) {
+      currentCategory = cat;
+      renderCategoryFilters();
+      renderCatalog();
+    }
+
+    function renderCatalog() {
+      const grid = document.getElementById('product-grid');
+      const emptyMsg = document.getElementById('no-products-msg');
+      const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+
+      const filtered = products.filter(p => {
+        const matchesCat = currentCategory === "All" || p.category === currentCategory;
+        const matchesSearch = p.title.toLowerCase().includes(searchQuery) || 
+                              p.description.toLowerCase().includes(searchQuery);
+        return matchesCat && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyMsg.classList.remove('hidden');
+        return;
+      }
+
+      emptyMsg.classList.add('hidden');
+
+      grid.innerHTML = filtered.map(product => `
+        <div class="group bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="relative overflow-hidden h-64 bg-slate-100">
+              <img 
+                src="${product.image}" 
+                alt="${product.title}" 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                onerror="this.src='https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80'"
+              />
+              <span class="absolute top-3 left-3 px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[11px] font-semibold text-rose-800 shadow-sm">
+                ${product.category}
+              </span>
+              ${!product.inStock ? `
+                <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px] flex items-center justify-center">
+                  <span class="px-4 py-1.5 bg-red-600 text-white text-xs font-bold uppercase rounded-full tracking-wider shadow-md">Out of Stock</span>
+                </div>
+              ` : ''}
+            </div>
+            
+            <div class="p-6">
+              <h3 class="font-serif font-bold text-slate-900 text-lg group-hover:text-rose-600 transition-colors">
+                ${product.title}
+              </h3>
+              <p class="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                ${product.description}
+              </p>
+            </div>
+          </div>
+
+          <div class="px-6 pb-6 pt-2 flex items-center justify-between border-t border-slate-50">
+            <div>
+              <span class="text-xs text-slate-400 block">Price</span>
+              <span class="font-serif font-bold text-slate-900 text-xl">$${product.price.toFixed(2)}</span>
+            </div>
+            
+            <button 
+              onclick="addToCart(${product.id})"
+              ${!product.inStock ? 'disabled' : ''}
+              class="px-4 py-2.5 rounded-2xl bg-rose-50 text-rose-700 hover:bg-rose-600 hover:text-white font-medium text-xs transition-all duration-200 flex items-center gap-1.5 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">
+              <i data-lucide="plus" class="w-4 h-4"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    /* ================= SHOPPING CART LOGIC ================= */
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!product || !product.inStock) return;
+
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push({ ...product, quantity: 1 });
+      }
+
+      updateCartUI();
+      showToast(`Added "${product.title}" to cart!`);
+    }
+
+    function updateQuantity(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+
+      item.quantity += delta;
+      if (item.quantity <= 0) {
+        cart = cart.filter(i => i.id !== productId);
+      }
+      updateCartUI();
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(i => i.id !== productId);
+      updateCartUI();
+      showToast("Item removed from basket.", "info");
+    }
+
+    function updateCartUI() {
+      const badge = document.getElementById('cart-badge');
+      const container = document.getElementById('cart-items-container');
+      const emptyMsg = document.getElementById('cart-empty-msg');
+      const footer = document.getElementById('cart-footer');
+      const subtotalEl = document.getElementById('cart-subtotal');
+      const totalEl = document.getElementById('cart-total');
+
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+      // Badge
+      if (totalItems > 0) {
+        badge.textContent = totalItems;
+        badge.classList.remove('hidden');
+        badge.classList.add('badge-bounce');
+        setTimeout(() => badge.classList.remove('badge-bounce'), 300);
+      } else {
+        badge.classList.add('hidden');
+      }
+
+      // Items render
+      if (cart.length === 0) {
+        container.innerHTML = '';
+        emptyMsg.classList.remove('hidden');
+        footer.classList.add('hidden');
+      } else {
+        emptyMsg.classList.add('hidden');
+        footer.classList.remove('hidden');
+
+        container.innerHTML = cart.map(item => `
+          <div class="flex gap-4 pt-4 first:pt-0 items-center justify-between">
+            <img src="${item.image}" alt="${item.title}" class="w-16 h-16 object-cover rounded-xl border border-slate-100">
+            <div class="flex-1 min-w-0">
+              <h4 class="font-semibold text-slate-900 text-xs truncate">${item.title}</h4>
+              <p class="text-xs text-rose-600 font-bold mt-0.5">$${item.price.toFixed(2)}</p>
+              
+              <div class="flex items-center gap-2 mt-2">
+                <button onclick="updateQuantity(${item.id}, -1)" class="w-6 h-6 rounded-md bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-xs font-bold">-</button>
+                <span class="text-xs font-semibold text-slate-700 w-4 text-center">${item.quantity}</span>
+                <button onclick="updateQuantity(${item.id}, 1)" class="w-6 h-6 rounded-md bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-xs font-bold">+</button>
+              </div>
+            </div>
+
+            <button onclick="removeFromCart(${item.id})" class="text-slate-400 hover:text-rose-600 p-1">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+        `).join('');
+      }
+
+      subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+      totalEl.textContent = `$${subtotal.toFixed(2)}`;
+      lucide.createIcons();
+    }
+
+    function toggleCartModal() {
+      const modal = document.getElementById('cart-modal');
+      modal.classList.toggle('hidden');
+    }
+
+    function openCheckoutModal() {
+      toggleCartModal();
+      document.getElementById('checkout-modal').classList.remove('hidden');
+    }
+
+    function closeCheckoutModal() {
+      document.getElementById('checkout-modal').classList.add('hidden');
+    }
+
+    function handleCheckoutSubmit(e) {
+      e.preventDefault();
+      closeCheckoutModal();
+      cart = [];
+      updateCartUI();
+      showToast("Order placed successfully! We'll start crafting your flowers.", "success");
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      e.target.reset();
+      showToast("Thank you! Our florist team will contact you shortly.", "success");
+    }
+
+    /* ================= ADMIN MANAGEMENT LOGIC ================= */
+    function openLoginModal() {
+      document.getElementById('login-modal').classList.remove('hidden');
+    }
+
+    function closeLoginModal() {
+      document.getElementById('login-modal').classList.add('hidden');
+    }
+
+    function handleLoginSubmit(e) {
+      e.preventDefault();
+      const user = document.getElementById('login-username').value;
+      const pass = document.getElementById('login-password').value;
+
+      if (user === 'admin' && pass === 'flower123') {
+        isAdminLoggedIn = true;
+        closeLoginModal();
+        updateAdminAuthUI();
+        showToast("Logged in as Admin successfully!", "success");
+      } else {
+        showToast("Invalid credentials. Use admin / flower123", "error");
+      }
+    }
+
+    function handleLogout() {
+      isAdminLoggedIn = false;
+      updateAdminAuthUI();
+      showToast("Logged out of Admin Portal.", "info");
+    }
+
+    function updateAdminAuthUI() {
+      const content = document.getElementById('admin-content');
+      const badge = document.getElementById('auth-status-badge');
+      const loginBtn = document.getElementById('login-modal-btn');
+      const logoutBtn = document.getElementById('logout-btn');
+
+      if (isAdminLoggedIn) {
+        content.classList.remove('opacity-50', 'pointer-events-none');
+        badge.textContent = "Authenticated";
+        badge.className = "px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-md text-xs font-medium";
+        loginBtn.classList.add('hidden');
+        logoutBtn.classList.remove('hidden');
+      } else {
+        content.classList.add('opacity-50', 'pointer-events-none');
+        badge.textContent = "Logged Out";
+        badge.className = "px-2.5 py-1 bg-amber-100 text-amber-800 rounded-md text-xs font-medium";
+        loginBtn.classList.remove('hidden');
+        logoutBtn.classList.add('hidden');
+      }
+    }
+
+    function handleImageFileUpload(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          uploadedBase64Image = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function handleAddProduct(e) {
+      e.preventDefault();
+      if (!isAdminLoggedIn) return;
+
+      const title = document.getElementById('prod-title').value.trim();
+      const category = document.getElementById('prod-category').value;
+      const price = parseFloat(document.getElementById('prod-price').value);
+      const urlInput = document.getElementById('prod-img-url').value.trim();
+      const desc = document.getElementById('prod-desc').value.trim();
+
+      const finalImage = uploadedBase64Image || urlInput || "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80";
+
+      const newProduct = {
+        id: Date.now(),
+        title,
+        category,
+        price,
+        image: finalImage,
+        description: desc || "Fresh artisan bloom arrangement.",
+        inStock: true
+      };
+
+      products.unshift(newProduct);
+      
+      // Reset form
+      e.target.reset();
+      uploadedBase64Image = "";
+
+      // Sync views
+      renderCatalog();
+      renderAdminInventory();
+      showToast(`Product "${title}" added to store!`, "success");
+    }
+
+    function deleteProduct(productId) {
+      if (!isAdminLoggedIn) return;
+      products = products.filter(p => p.id !== productId);
+      
+      // Sync
+      renderCatalog();
+      renderAdminInventory();
+      showToast("Product deleted from database.", "info");
+    }
+
+    function toggleStock(productId) {
+      if (!isAdminLoggedIn) return;
+      const product = products.find(p => p.id === productId);
+      if (product) {
+        product.inStock = !product.inStock;
+        renderCatalog();
+        renderAdminInventory();
+        showToast(`Stock updated for ${product.title}`, "info");
+      }
+    }
+
+    function renderAdminInventory() {
+      const tableBody = document.getElementById('admin-inventory-table');
+      const countEl = document.getElementById('admin-count');
+
+      countEl.textContent = products.length;
+
+      tableBody.innerHTML = products.map(product => `
+        <tr class="hover:bg-slate-50 transition-colors">
+          <td class="p-3">
+            <div class="flex items-center gap-3">
+              <img src="${product.image}" class="w-10 h-10 object-cover rounded-lg border border-slate-200" alt="">
+              <div>
+                <p class="font-semibold text-slate-800 text-xs">${product.title}</p>
+                <p class="text-[10px] text-slate-400 font-mono">ID: #${product.id}</p>
+              </div>
+            </div>
+          </td>
+          <td class="p-3 text-xs text-slate-600">${product.category}</td>
+          <td class="p-3 text-xs font-bold text-slate-900">$${product.price.toFixed(2)}</td>
+          <td class="p-3">
+            <button onclick="toggleStock(${product.id})" class="px-2.5 py-1 rounded-full text-[10px] font-bold ${
+              product.inStock ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'
+            }">
+              ${product.inStock ? 'In Stock' : 'Out of Stock'}
+            </button>
+          </td>
+          <td class="p-3 text-right">
+            <button onclick="deleteProduct(${product.id})" class="p-1.5 text-slate-400 hover:text-red-600 transition-colors">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </td>
+        </tr>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    /* ================= NOTIFICATIONS / TOAST ================= */
+    function showToast(message, type = "success") {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+
+      const bg = type === 'success' ? 'bg-slate-900 text-white' : 'bg-rose-600 text-white';
+      const icon = type === 'success' ? 'check-circle' : 'info';
+
+      toast.className = `flex items-center gap-2.5 px-4 py-3 rounded-2xl shadow-xl text-xs font-medium ${bg} animate-slide-in pointer-events-auto border border-white/10`;
+      toast.innerHTML = `
+        <i data-lucide="${icon}" class="w-4 h-4 text-rose-400 shrink-0"></i>
+        <span>${message}</span>
+      `;
+
+      container.appendChild(toast);
+      lucide.createIcons();
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(100%)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
