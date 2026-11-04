@@ -60,6 +60,7 @@
       }
     }
   </script>
+  
 
   <style>
     /* Custom Styles & Smooth Scroll */
@@ -93,6 +94,15 @@
     .animate-slide-in {
       animation: slideIn 0.3s ease-out forwards;
     }
+    .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+}
   </style>
 </head>
 <body class="bg-cream-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col selection:bg-rose-200 selection:text-rose-900">
@@ -103,12 +113,16 @@
       <div class="flex items-center justify-between h-20">
         
         <!-- Logo -->
-        <a href="#home" onclick="switchView('store')" class="flex items-center gap-2 group">
-          <div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-600 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300">
-            <i data-lucide="flower-2" class="w-6 h-6"></i>
-          </div>
-          <span class="font-serif text-2xl font-bold tracking-tight text-slate-900">Floral <span class="text-rose-600 font-normal italic">Elegance</span></span>
-        </a>
+        
+<a href="#home"
+   onclick="switchView('store')"
+   class="flex items-center justify-start mr-auto group">
+
+    <img src="image.logo.jpeg"
+         alt="Website Logo"
+         class="w-26 h-20 object-contain">
+
+</a>
 
         <!-- Desktop Navigation Links -->
         <nav class="hidden md:flex items-center space-x-8 font-medium text-sm text-slate-600">
@@ -122,11 +136,11 @@
         <div class="flex items-center gap-4">
           
           <!-- Admin Route Toggle Button -->
-          <button id="admin-toggle-btn" onclick="toggleAdminView()" class="inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-full border border-sage-300 bg-sage-50 text-sage-800 hover:bg-sage-600 hover:text-white transition-all duration-200 shadow-sm">
-            <i data-lucide="shield-check" class="w-4 h-4"></i>
-            <span id="admin-btn-text" class="hidden sm:inline">Admin Portal</span>
-          </button>
-
+          <button id="admin-toggle-btn"
+        onclick="toggleAdminView()"
+        class="hidden">
+    Admin Portal
+</button>
           <!-- Shopping Cart Icon Button -->
           <button onclick="toggleCartModal()" class="relative p-2.5 text-slate-700 hover:text-rose-600 rounded-full hover:bg-rose-50 transition-colors" aria-label="View Shopping Cart">
             <i data-lucide="shopping-bag" class="w-6 h-6"></i>
@@ -530,15 +544,28 @@
 
 
   <!-- ================= FOOTER ================= -->
-  <footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
+  
+          </ul>
+        </div>
+
+        
+
+      </div>
+
+    </div>
+  </footer>
+<footer class="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         
         <div class="space-y-4">
-          <div class="flex items-center gap-2 text-white">
-            <i data-lucide="flower-2" class="w-6 h-6 text-rose-500"></i>
-            <span class="font-serif text-xl font-bold tracking-tight">Floral Elegance</span>
-          </div>
+          <div class="flex items-center">
+    <a href="#home" onclick="switchView('store')">
+        <img src="image.logo.jpeg"
+             alt="Floral Elegance Logo"
+             class="w-16 h-12 object-contain object-left">
+    </a>
+</div>
           <p class="text-xs text-slate-400 leading-relaxed">Artisan floral design shop supplying luxury arrangements, fresh garden bouquets, and bespoke event styling.</p>
         </div>
 
@@ -561,22 +588,42 @@
             <li>Bridal & Occasion Bouquets</li>
           </ul>
         </div>
+        <div class="md:col-start-4 md:justify-self-end">
+  <h4 class="text-sm font-semibold uppercase text-white tracking-wider mb-3">
+    Operating Hours
+  </h4>
+  <p class="text-xs text-slate-400">Mon - Fri: 8:00 AM - 7:00 PM</p>
+  <p class="text-xs text-slate-400 mt-1">Saturday: 9:00 AM - 5:00 PM</p>
+  <p class="text-xs text-slate-400 mt-1">Sunday: Express Deliveries Only</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
 
-        <div>
-          <h4 class="text-sm font-semibold uppercase text-white tracking-wider mb-3">Operating Hours</h4>
-          <p class="text-xs text-slate-400">Mon - Fri: 8:00 AM - 7:00 PM</p>
-          <p class="text-xs text-slate-400 mt-1">Saturday: 9:00 AM - 5:00 PM</p>
-          <p class="text-xs text-slate-400 mt-1">Sunday: Express Deliveries Only</p>
-        </div>
-
-      </div>
-
-      <div class="mt-12 pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
-        &copy; 2026 Floral Elegance Boutique. All Rights Reserved. Designed for elegance & fresh moments.
-      </div>
+    <!-- Logo -->
+    <div>
+      
     </div>
-  </footer>
 
+    <!-- Quick Navigation -->
+    <div>
+        
+    </div>
+
+    <!-- Floral Categories -->
+    <div>
+        
+    </div>
+
+    <!-- Operating Hours -->
+    <div>
+        
+    </div>
+
+</div>
+
+<!-- Copyright - Footer Bottom -->
+<div class="mt-12 pt-6 border-t border-slate-800 text-center text-[11px] text-slate-500 whitespace-nowrap">
+  &copy; 2026 Floral Elegance Boutique. All Rights Reserved. Designed for elegance & fresh moments.
+</div>
 
   <!-- ================= SHOPPING CART MODAL ================= -->
   <div id="cart-modal" class="fixed inset-0 z-50 overflow-hidden hidden">
@@ -743,7 +790,18 @@
 
 
   <!-- ================= APPLICATION SCRIPT ================= -->
-  <script>
+  <script>// HIDDEN ADMIN URL
+document.addEventListener("DOMContentLoaded", function () {
+
+    const loginModal = document.getElementById("login-modal");
+
+    if (window.location.pathname === "/admin") {
+        loginModal.classList.remove("hidden");
+    } else {
+        loginModal.classList.add("hidden");
+    }
+
+});
     /* ================= INITIAL STATE & PRODUCT DATA ================= */
     let products = [
       {
@@ -751,7 +809,7 @@
         title: "Velvet Crimson Roses",
         category: "Roses",
         price: 59.99,
-        image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+        image: "https://unsplash.com/photos/a-bouquet-of-red-roses-on-a-black-background-lrjuy4kJ-3I",
         description: "Classic long-stem crimson red roses hand-tied with fresh eucalyptus leaves.",
         inStock: true
       },
@@ -1237,6 +1295,18 @@
         setTimeout(() => toast.remove(), 300);
       }, 3000);
     }
+    
+// FLORAL ELEGANCE ADMIN ROUTE
+document.addEventListener("DOMContentLoaded", function () {
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("admin") === "1") {
+        document.getElementById("store-view").classList.add("hidden");
+        document.getElementById("admin-view").classList.remove("hidden");
+
+        document.getElementById("login-modal").classList.add("hidden");
+    }
+});
   </script>
 </body>
 </html>
